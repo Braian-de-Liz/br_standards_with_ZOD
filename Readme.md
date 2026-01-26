@@ -1,105 +1,103 @@
-# 🇧🇷 br_standards_with_zod
+# br_standards_with_zod
 
-Uma biblioteca leve, moderna e de alto desempenho para validação de documentos brasileiros (CPF, CNPJ, RG) integrada nativamente ao **Zod**.
+Biblioteca leve, moderna e tipada para validação de documentos brasileiros (CPF, CNPJ e RG), integrada nativamente ao **Zod**.
 
-[![npm version](https://img.shields.io/npm/v/br_standards_with_zod.svg)](https://www.npmjs.com/package/br_standards_with_zod)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?logo=typescript)](https://www.typescriptlang.org/)
-
-## 🚀 Por que usar esta biblioteca?
-
-Diferente de validações baseadas apenas em Expressões Regulares (Regex), a **br_standards_with_zod** executa o cálculo matemático dos dígitos verificadores, garantindo que o documento seja real e válido.
-
-- **Limpeza Automática:** Aceita documentos com máscara (ex: `123.456.789-01`) e retorna apenas os números (`12345678901`) através do `.transform()`.
-- **Dual Build:** Suporte nativo para **ESM** (`import`) e **CommonJS** (`require`), graças ao build otimizado com `tsup`.
-- **Zero Boilerplate:** Não precisa criar funções de refinamento complexas no Zod; já entregamos o método pronto e tipado.
-- **Segurança:** Bloqueia automaticamente sequências repetidas (ex: `111.111.111-11`).
-
----
-
-## 📦 Instalação
-
-```bash
-npm install br_standards_with_zod zod
-# ou
-yarn add br_standards_with_zod zod
-
-
-Tchuu-Tchuu
-Gem personalizado
-Aqui está o conteúdo completo para o seu arquivo README.md, pronto para copiar e colar.
-
-Markdown
-# 🇧🇷 br_standards_with_zod
-
-Uma biblioteca leve, moderna e de alto desempenho para validação de documentos brasileiros (CPF, CNPJ, RG) integrada nativamente ao **Zod**.
+Diferente de validações baseadas apenas em expressões regulares, esta biblioteca realiza a **validação matemática dos dígitos verificadores**, garantindo que o documento seja estruturalmente válido.
 
 [![npm version](https://img.shields.io/npm/v/br_standards_with_zod.svg)](https://www.npmjs.com/package/br_standards_with_zod)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?logo=typescript)](https://www.typescriptlang.org/)
 
-## 🚀 Por que usar esta biblioteca?
+---
 
-Diferente de validações baseadas apenas em Expressões Regulares (Regex), a **br_standards_with_zod** executa o cálculo matemático dos dígitos verificadores, garantindo que o documento seja real e válido.
+## Por que usar esta biblioteca?
 
-- **Limpeza Automática:** Aceita documentos com máscara (ex: `123.456.789-01`) e retorna apenas os números (`12345678901`) através do `.transform()`.
-- **Dual Build:** Suporte nativo para **ESM** (`import`) e **CommonJS** (`require`), graças ao build otimizado com `tsup`.
-- **Zero Boilerplate:** Não precisa criar funções de refinamento complexas no Zod; já entregamos o método pronto e tipado.
-- **Segurança:** Bloqueia automaticamente sequências repetidas (ex: `111.111.111-11`).
+- **Validação real**: cálculo matemático dos dígitos verificadores (CPF e CNPJ).
+- **Aceita máscara ou não**: entradas como `123.456.789-09` são automaticamente normalizadas.
+- **Transformação automática**: retorno sempre limpo (apenas números), pronto para persistência.
+- **Integração nativa com Zod**: sem necessidade de `refine` manual.
+- **Bloqueio de sequências inválidas**: ex.: `00000000000`, `11111111111`.
+- **Dual build**: compatível com ESM e CommonJS.
+- **Tipagem completa**: excelente suporte a IntelliSense.
 
 ---
 
-## 📦 Instalação
+## Instalação
 
 ```bash
 npm install br_standards_with_zod zod
 # ou
 yarn add br_standards_with_zod zod
-🛠️ Como Usar
-A biblioteca oferece o objeto zbr, que contém métodos encadeáveis ao Zod.
+````
 
-Exemplo em TypeScript / ESM
-TypeScript
+Exemplo (TypeScript / ESM)
+````typescript
 import { z } from 'zod';
 import { zbr } from 'br_standards_with_zod';
-
 const registerSchema = z.object({
   name: z.string().min(3),
-  cpf: zbr.cpf("CPF inválido!"), // Mensagem customizada é opcional
+  cpf: zbr.cpf("CPF inválido"),
   cnpj: zbr.cnpj()
 });
 
-// A lib aceita entradas com ou sem máscara
 const data = registerSchema.parse({
   name: "Braian de Liz",
   cpf: "123.456.789-09",
   cnpj: "12.345.678/0001-00"
 });
 
-// O Zod retorna o dado limpo (apenas números), pronto para o banco de dados
-console.log(data.cpf);  // Saída: "12345678909"
-console.log(data.cnpj); // Saída: "12345678000100"
-🔍 Métodos Disponíveis
-Método	Descrição	Regra de Validação
-zbr.cpf(msg?)	Cadastro de Pessoa Física	Validação matemática de dígitos (Módulo 11) + bloqueio de repetidos.
-zbr.cnpj(msg?)	Cadastro Nacional de Pessoa Jurídica	Validação matemática completa e remoção automática de máscara.
-zbr.rg(msg?)	Registro Geral	Validação de formato básico (7 a 9 dígitos numéricos).
-⚙️ Compatibilidade
-Esta biblioteca foi projetada para ser universal.
+console.log(data.cpf);  // "12345678909"
+console.log(data.cnpj); // "12345678000100"
+````
 
-Frontend & Backend: Funciona no Navegador, Node.js, Bun e Deno.
+Exemplo Typescript CommonJS(.cjs)
+`````typescript
+const { z } = require('zod');
+const { zbr } = require('br_standards_with_zod');
 
-Fullstack: Compatível com React Hook Form, Fastify, NestJS, Next.js e Express.
+const registerSchema = z.object({
+  name: z.string().min(3),
+  cpf: zbr.cpf("CPF inválido"),
+  cnpj: zbr.cnpj()
+});
 
-Tipagem: Suporte total a IntelliSense para uma melhor experiência de desenvolvimento.
+const data = registerSchema.parse({
+  name: "Braian de Liz",
+  cpf: "123.456.789-09",
+  cnpj: "12.345.678/0001-00"
+});
 
-🧪 Testes
-Nós utilizamos o Vitest para garantir a precisão de cada validador. Para rodar os testes localmente:
+console.log(data.cpf);  // "12345678909"
+console.log(data.cnpj); // "12345678000100"
 
-Bash
+`````
+
+Métodos disponíveis
+Método	Documento	Validação aplicada
+zbr.cpf(msg?)	CPF	Cálculo de dígitos (módulo 11) + bloqueio de sequências repetidas
+zbr.cnpj(msg?)	CNPJ	Validação matemática completa + normalização
+zbr.rg(msg?)	RG	Validação estrutural (7 a 9 dígitos numéricos)
+A mensagem de erro é opcional. Caso não informada, uma mensagem padrão será utilizada.
+
+Compatibilidade
+Projetada para ambientes modernos e fullstack:
+
+Frontend e Backend: Browser, Node.js, Bun e Deno
+
+Frameworks: React Hook Form, Fastify, NestJS, Next.js, Express
+
+TypeScript-first: tipagem estrita e previsível
+
+Testes
+Os validadores são cobertos por testes automatizados utilizando Vitest.
+
 npm test
-📄 Licença
-Distribuído sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
+Licença
+Distribuído sob a licença MIT.
+Consulte o arquivo LICENSE para mais informações.
 
-Feito com ❤️ por Braian de Liz da Silva
+Desenvolvido por
+Braian de Liz da Silva
 
+
+---
