@@ -3,24 +3,36 @@
   "version": "1.0.0",
   "description": "Validações de documentos brasileiros (CPF, CNPJ, RG) integradas ao Zod.",
   "type": "module",
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "test": "vitest",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [],
+  "keywords": ["zod", "cpf", "cnpj", "brazil", "validation"],
   "author": "Braian de Liz da Silva",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^25.0.9",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "vitest": "^4.0.18"
+    "@types/node": "^22.0.0",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
   },
-  "dependencies": {
-    "zod": "^4.3.5"
+  "peerDependencies": {
+    "zod": "^3.0.0"
   }
 }

@@ -1,1 +1,16 @@
-node_modules
+# Ignorar arquivos de configuração e desenvolvimento
+src/
+tests/
+vitest.config.ts
+tsconfig.json
+.gitignore
+.npmignore
+
+# Ignorar logs e metadados de ferramentas
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Se você usar ferramentas de lint/format
+.eslintcache
+.prettierrc
