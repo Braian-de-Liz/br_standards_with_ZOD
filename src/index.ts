@@ -1,3 +1,4 @@
+// src\index.ts
 import { z } from "zod";
 import { Valid_CPF } from "./validations/cpf.js";
 import { Validation_cnpj } from "./validations/cnpj.js";
