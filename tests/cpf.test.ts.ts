@@ -1,6 +1,6 @@
 // tests\test_cpf.ts
 import { describe, it, expect } from 'vitest';
-import { Valid_CPF } from '../src/validations/cpf';
+import { Valid_CPF } from '../src/validations/cpf.js';
 
 describe('Validação de CPF', () => {
   it('deve retornar true para um CPF válido e formatado', () => {
