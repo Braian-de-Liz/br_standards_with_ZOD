@@ -1,32 +1,33 @@
-// src\validations\rg.ts
-const validateDígitoRG = (rg: string): boolean => {
-    const base = rg.substring(0, 8);
-    const dvInformado = rg.substring(8, 9);
+const RG_validate = (rg: string): boolean => {
+  const clean = rg.toUpperCase().replace(/[^0-9X]/g, "");
+
+  if (clean.length < 7 || clean.length > 9) return false;
+
+  if (clean.length === 9) {
+    const base = clean.substring(0, 8);
+    const digitoInformado = clean[8];
 
     let soma = 0;
+
     for (let i = 0; i < 8; i++) {
-        soma += parseInt(base[i]!) * (i + 2);
+      soma += Number(base[i]) * (i + 2);
     }
 
     const resto = soma % 11;
-    const dvCalculado = resto === 0 ? "0" : (11 - resto).toString();
+    let digitoEsperado = "";
 
-    return dvInformado === dvCalculado;
-};
-
-const RG_validate = (RG: string): boolean => {
-    const digitos = RG.replace(/\D/g, "");
-
-    if (digitos.length < 7 || digitos.length > 9) {
-        return false;
+    if (resto === 0) {
+      digitoEsperado = "0";
+    } else if (resto === 1) {
+      digitoEsperado = "X";
+    } else {
+      digitoEsperado = (11 - resto).toString();
     }
 
-    if (digitos.length === 9) {
-        return validateDígitoRG(digitos);
-    }
+    return digitoInformado === digitoEsperado;
+  }
 
-    return true;
+  return true;
 };
-
 
 export { RG_validate };

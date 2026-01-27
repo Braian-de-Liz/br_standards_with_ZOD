@@ -20,7 +20,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "test": "vitest",
-    "prepublishOnly": "npm run build"
+    "erro": "tsc --noEmit",
+    "publish": "npm run build"
   },
   "keywords": [
     "zod",
