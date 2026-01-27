@@ -2,6 +2,7 @@
 import { describe, it, expect } from 'vitest';
 import { Valid_CPF } from '../src/validations/cpf.js';
 
+
 describe('Validação de CPF', () => {
   it('deve retornar true para um CPF válido e formatado', () => {
     expect(Valid_CPF('123.456.789-09')).toBe(true);

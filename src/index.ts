@@ -24,4 +24,3 @@ const zbr = {
 
 
 export { zbr };
-export default zbr;
