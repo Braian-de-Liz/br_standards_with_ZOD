@@ -8,9 +8,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
@@ -21,14 +21,16 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "test": "vitest",
     "erro": "tsc --noEmit",
-    "publish": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "zod",
     "cpf",
     "cnpj",
+    "rg",
     "brazil",
-    "validation"
+    "validation",
+    "typescript"
   ],
   "author": "Braian de Liz da Silva",
   "license": "MIT",
@@ -40,6 +42,6 @@
     "vitest": "^2.1.0"
   },
   "peerDependencies": {
-    "zod": "^3.25.76"
+    "zod": "^3.0.0"
   }
 }

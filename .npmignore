@@ -1,14 +1,26 @@
-# Ignorar arquivos de configuração e desenvolvimento
+# Desenvolvimento e Código Fonte
 src/
 tests/
 vitest.config.ts
 tsconfig.json
-.gitignore
-.npmignore
+.editorconfig
+tsup.config.ts
 
+# Logs e Dependências
 node_modules/
 npm-debug.log*
 package-lock.json
+yarn.lock
+pnpm-lock.yaml
 
+# Lint e Formatação
 .eslintcache
+.eslintrc*
 .prettierrc
+.prettierignore
+
+# Git e Sistema
+.git/
+.gitignore
+.DS_Store
+Thumbs.db
