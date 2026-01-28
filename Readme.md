@@ -26,8 +26,6 @@ Diferente de validações baseadas apenas em expressões regulares, esta bibliot
 
 ```bash
 npm install br_standards_with_zod zod
-# ou
-yarn add br_standards_with_zod zod
 ````
 
 Exemplo (TypeScript / ESM)
