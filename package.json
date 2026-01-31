@@ -1,6 +1,6 @@
 {
   "name": "br_standards_with_zod",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Validações de documentos brasileiros (CPF, CNPJ, RG) integradas ao Zod.",
   "type": "module",
   "main": "./dist/index.cjs",

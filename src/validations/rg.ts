@@ -3,29 +3,11 @@ const RG_validate = (rg: string): boolean => {
 
   if (clean.length < 7 || clean.length > 9) return false;
 
-  if (clean.length === 9) {
-    const base = clean.substring(0, 8);
-    const digitoInformado = clean[8];
-
-    let soma = 0;
-
-    for (let i = 0; i < 8; i++) {
-      soma += Number(base[i]) * (i + 2);
-    }
-
-    const resto = soma % 11;
-    let digitoEsperado = "";
-
-    if (resto === 0) {
-      digitoEsperado = "0";
-    } else if (resto === 1) {
-      digitoEsperado = "X";
-    } else {
-      digitoEsperado = (11 - resto).toString();
-    }
-
-    return digitoInformado === digitoEsperado;
+  if (clean.includes("X") && clean.indexOf("X") !== clean.length - 1) {
+    return false;
   }
+
+  if (/^(\d)\1+$/.test(clean)) return false;
 
   return true;
 };

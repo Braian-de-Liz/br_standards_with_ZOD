@@ -6,8 +6,8 @@ describe('Validação de RG', () => {
     expect(RG_validate('12.345.67')).toBe(true);
   });
 
-it('deve aceitar RG com 9 dígitos (matematicamente válido)', () => {
-    expect(RG_validate('40.540.550-4')).toBe(true);
+  it('deve aceitar RG com 9 dígitos (matematicamente válido)', () => {
+    expect(RG_validate('25.634.720-7')).toBe(true);
   });
 
   it('deve aceitar RG terminando em X', () => {
